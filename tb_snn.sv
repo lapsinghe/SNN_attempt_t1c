@@ -33,55 +33,61 @@ module tb_snn(
     wire [7:0] o_data2;
     
     
-    localparam CLK_PERIOD = 5;
+    localparam CLK_PERIOD = 10.5;
     
-    always #(CLK_PERIOD) i_clk = ~i_clk;
+    always #(CLK_PERIOD/2) i_clk = ~i_clk;
     
     initial begin
-        i_rstn = 1;
-        #(CLK_PERIOD*5)
+        #(CLK_PERIOD)
         i_rstn = 0;
         #(CLK_PERIOD)
         i_rstn = 1;
     end
     
     initial begin
+        #(CLK_PERIOD*5);
         i_data0 = 1;
         i_data1 = 2;
         i_data2  = 3;
         
-        #(CLK_PERIOD*4);
+        #(CLK_PERIOD*5);
         
-        i_data0 = 10;
-        i_data1 = 20;
-        i_data2  = 30;
-        
-        #(CLK_PERIOD*4);       
-   
         i_data0 = 0;
         i_data1 = 0;
         i_data2  = 0;
         
-        #(CLK_PERIOD*4);  
+        #(CLK_PERIOD*5);       
+   
+        i_data0 = 10;
+        i_data1 = 20;
+        i_data2  = 30;
+        
+        #(CLK_PERIOD*5);  
         
         
-        i_data0 = 40;
-        i_data1 = 40;
-        i_data2  = 40;
+        i_data0 = 0;
+        i_data1 = 0;
+        i_data2  = 0;
         
-        #(CLK_PERIOD*4); 
+        #(CLK_PERIOD*5); 
  
         i_data0 = 1;
         i_data1 = 1;
         i_data2  = 1;
         
-        #(CLK_PERIOD*4);        
+        #(CLK_PERIOD*5);        
 
+        i_data0 = 0;
+        i_data1 = 0;
+        i_data2  = 0;
+        
+        #(CLK_PERIOD*5); 
         i_data0 = 40;
         i_data1 = 40;
         i_data2  = 40;
+               
         
-        #(CLK_PERIOD*4);                 
+        $finish;                
     end
     
     snn_top DUT (
